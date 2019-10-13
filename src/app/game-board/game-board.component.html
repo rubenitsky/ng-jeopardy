@@ -1,1 +1,23 @@
-<p>game-board works!</p>
+<div class="game-board-container">
+  <div class="">
+    <div *ngFor="let category of categories"
+         class="col d-flex flex-column">
+
+      <div class="grid-square category-header">{{ category.label }}</div>
+
+      <div *ngFor="let clue of category.clues"
+           class="grid-square clue-container">
+        <h1>{{ clue.points }}</h1>
+      </div>
+
+    </div>
+  </div>
+  <!--TEAM SCORE BOARD SECTION - START-->
+  <div class="score-board">
+    <div *ngFor="let contestant of contestants" class="team-board">
+      <div class="team-name">{{ contestant.name }}</div>
+      <div class="team-score">{{ contestant.score }}</div>
+    </div>
+  <!--TEAM SCORE BOARD SECTION - END-->
+  </div>
+</div>
