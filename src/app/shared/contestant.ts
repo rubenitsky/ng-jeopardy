@@ -1,6 +1,6 @@
-export public class Contestant {
+export class Contestant {
   private _name: string;
-  private _score: number;
+  private _score: number = 0;
 
   constructor(name: string) {
     this._name = name;
@@ -17,10 +17,6 @@ export public class Contestant {
 
   get score(): number {
     return this._score;
-  }
-
-  set score(value: number) {
-    this._score = value;
   }
 
   public addToScore(value: number) {
