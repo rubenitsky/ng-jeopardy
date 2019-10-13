@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {Contestant} from "../shared/contestant";
+import {Category} from "../shared/category";
+import {Clue} from "../shared/clue";
 
 @Component({
   selector: 'app-game-board',
@@ -7,83 +10,62 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GameBoardComponent implements OnInit {
 
-  public categories = [
-    {
-      label: 'The Dinosaurs',
-      clues: [
-        { score: 200, clue: '', contestant: '' },
-        { score: 400, clue: '', contestant: '' },
-        { score: 600, clue: '', contestant: '' },
-        { score: 800, clue: '', contestant: '' },
-        { score: 1000, clue: '', contestant: '' },
-      ]
-    },
-    {
-      label: 'Notable Women',
-      clues: [
-        { score: 200, clue: '', contestant: '' },
-        { score: 400, clue: '', contestant: '' },
-        { score: 600, clue: '', contestant: '' },
-        { score: 800, clue: '', contestant: '' },
-        { score: 1000, clue: '', contestant: '' },
-      ]
-    },
-    {
-      label: 'Oxford English Dictionary',
-      clues: [
-        { score: 200, clue: '', contestant: '' },
-        { score: 400, clue: '', contestant: '' },
-        { score: 600, clue: '', contestant: '' },
-        { score: 800, clue: '', contestant: '' },
-        { score: 1000, clue: '', contestant: '' },
-      ]
-    },
-    {
-      label: 'Name That Instrument',
-      clues: [
-        { score: 200, clue: '', contestant: '' },
-        { score: 400, clue: '', contestant: '' },
-        { score: 600, clue: '', contestant: '' },
-        { score: 800, clue: '', contestant: '' },
-        { score: 1000, clue: '', contestant: '' },
-      ]
-    },
-    {
-      label: 'Belgium',
-      clues: [
-        { score: 200, clue: '', contestant: '' },
-        { score: 400, clue: '', contestant: '' },
-        { score: 600, clue: '', contestant: '' },
-        { score: 800, clue: '', contestant: '' },
-        { score: 1000, clue: '', contestant: '' },
-      ]
-    },
-    {
-      label: 'Composers By Country',
-      clues: [
-        { score: 200, clue: '', contestant: '' },
-        { score: 400, clue: '', contestant: '' },
-        { score: 600, clue: '', contestant: '' },
-        { score: 800, clue: '', contestant: '' },
-        { score: 1000, clue: '', contestant: '' },
-      ]
-    }
+  private dinosaur = new Category('The Dinosaurs', [
+    new Clue(200, ''),
+    new Clue(400, ''),
+    new Clue(600, ''),
+    new Clue(800, ''),
+    new Clue(1000, '')
+  ]);
+
+  private women = new Category('Notable Women', [
+    new Clue(200, ''),
+    new Clue(400, ''),
+    new Clue(600, ''),
+    new Clue(800, ''),
+    new Clue(1000, '')
+  ]);
+
+  private oxford = new Category('Oxford English Dictionary', [
+    new Clue(200, ''),
+    new Clue(400, ''),
+    new Clue(600, ''),
+    new Clue(800, ''),
+    new Clue(1000, '')
+  ]);
+
+  private instrument = new Category('Name That Instrument', [
+    new Clue(200, ''),
+    new Clue(400, ''),
+    new Clue(600, ''),
+    new Clue(800, ''),
+    new Clue(1000, '')
+  ]);
+
+  private belgium = new Category('Belgium', [
+    new Clue(200, ''),
+    new Clue(400, ''),
+    new Clue(600, ''),
+    new Clue(800, ''),
+    new Clue(1000, '')
+  ]);
+
+  private composers = new Category('Composers By Country', [
+    new Clue(200, ''),
+    new Clue(400, ''),
+    new Clue(600, ''),
+    new Clue(800, ''),
+    new Clue(1000, '')
+  ]);
+  public categories: Array<Category> = [
+    this.dinosaur, this.women, this.oxford, this.instrument, this.belgium, this.composers
   ];
 
-  public contestants = [
-    {
-      name: 'Scott',
-      score: 0
-    },
-    {
-      name: 'Jim',
-      score: 0
-    },
-    {
-      name: 'Susan',
-      score: 0
-    }
-  ]
+  public contestants: Array<Contestant> = [
+    new Contestant('Scott'),
+    new Contestant('Jim'),
+    new Contestant('Susan')
+  ];
 
   constructor() { }
 

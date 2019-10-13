@@ -5,9 +5,13 @@ export class Category {
   private _label: string;
   private _clues: Map<number, Clue>;
 
-  constructor(label: string) {
+  constructor(label: string, clues?: Array<Clue>) {
     this._label = label;
     this._clues = new Map();
+
+    if (!!clues && clues.length > 0) {
+      this.addClues(clues);
+    }
   }
 
 
@@ -29,5 +33,9 @@ export class Category {
 
   public removeClue(score: number) {
     this._clues.delete(score);
+  }
+
+  public addClues(clues: Array<Clue>) {
+    clues.forEach(clue => this.addClue(clue));
   }
 }

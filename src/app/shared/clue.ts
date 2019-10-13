@@ -5,7 +5,7 @@ export class Clue {
   private _clue: string;
   private _answeredCorrectly: Contestant;
 
-  constructor(score) {
+  constructor(score, clue?: string) {
     this._score = score;
   }
 
