@@ -5,12 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GameBoardComponent } from './game-board/game-board.component';
 import { ScoreBoardComponent } from './score-board/score-board.component';
+import { ClueGridComponent } from './clue-grid/clue-grid.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     GameBoardComponent,
-    ScoreBoardComponent
+    ScoreBoardComponent,
+    ClueGridComponent
   ],
   imports: [
     BrowserModule,
