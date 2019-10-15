@@ -2,10 +2,9 @@ import {Contestant} from './contestant';
 
 
 export class Contestants {
-  private _contestantMap: Map<string, Contestant>;
+  private _contestantMap: Map<string, Contestant> = new Map();
 
   constructor() {
-    this._contestantMap = new Map();
   }
 
   public add(contestant: Contestant) {
@@ -14,6 +13,6 @@ export class Contestants {
   }
 
   public getList(): Array<Contestant> {
-    return this._contestantMap.values();
+    return Array.from(this._contestantMap.values());
   }
 }
