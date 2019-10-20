@@ -4,6 +4,7 @@
 }
 
 .grid-square {
+  background-color: inherit;
   font-size: 2em;
   font-weight: bold;
   color: #ffe790;
@@ -19,9 +20,17 @@
 
   &:hover {
     background-color: rgba(90, 152, 234, 0.85);
-    cursor: pointer;
   }
 }
+
+.complete {
+  color: transparent;
+
+  &:hover {
+    background-color: inherit;
+  }
+}
+
 
 .category-header {
   border-bottom: 3px solid #000000;

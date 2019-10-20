@@ -75,6 +75,9 @@ export class GameBoardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.composers.markClueAsComplete(400);
+    this.instrument.markClueAsComplete(600);
+
     this.contestant1.addToScore(140000);
     this.contestant2.addToScore(-30000);
     this.contestant3.addToScore(80000);

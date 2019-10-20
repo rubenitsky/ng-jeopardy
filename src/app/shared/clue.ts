@@ -4,6 +4,7 @@ export class Clue {
   private readonly _score: number;
   private _clue: string;
   private _answeredCorrectly: Contestant;
+  private _isComplete: boolean;
 
   constructor(score, clue?: string) {
     this._score = score;
@@ -31,5 +32,13 @@ export class Clue {
 
   set answeredCorrectly(value: Contestant) {
     this._answeredCorrectly = value;
+  }
+
+  get isComplete(): boolean {
+    return this._isComplete;
+  }
+
+  set isComplete(value: boolean) {
+    this._isComplete = value;
   }
 }

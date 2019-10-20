@@ -8,11 +8,15 @@
   </div>
   <div class="row d-flex flex-row flex-grow-1 no-gutters">
     <div *ngFor="let category of categories" class="d-flex flex-column col-2">
-      <div *ngFor="let clue of category.clues"
+      <button type="button" *ngFor="let clue of category.clues"
            class="row grid-square no-gutters"
+           [disabled]="clue.isComplete"
+           [ngClass]="{'complete': clue.isComplete}"
            (click)="showHint(clue)">
-        <span class="text-center align-middle">{{ clue.points | currency:'USD':'symbol':'.0' }}</span>
-      </div>
+        <span class="text-center align-middle">
+          {{ clue.points | currency:'USD':'symbol':'.0' }}
+        </span>
+      </button>
 
     </div>
   </div>

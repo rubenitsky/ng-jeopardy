@@ -23,6 +23,10 @@ export class Category {
     this._label = value;
   }
 
+  get clues() {
+    return Array.from(this._clues.values());
+  }
+
   public addClue(newClew: Clue) {
     this._clues.set(newClew.points, newClew);
   }
@@ -39,7 +43,7 @@ export class Category {
     clues.forEach(clue => this.addClue(clue));
   }
 
-  get clues() {
-    return Array.from(this._clues.values());
+  public markClueAsComplete(clueId: number) {
+    this._clues.get(clueId).isComplete = true;
   }
 }
