@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Contestant} from "../shared/contestant";
 
 @Component({
   selector: 'app-score-board',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./score-board.component.scss']
 })
 export class ScoreBoardComponent implements OnInit {
+
+  @Input('contestants') contestants: Array<Contestant>;
 
   constructor() { }
 

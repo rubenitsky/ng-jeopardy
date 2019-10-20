@@ -1,1 +1,6 @@
-<p>score-board works!</p>
+<div class="score-board row no-gutters align-middle justify-content-center">
+  <div *ngFor="let contestant of contestants" class="team-board {{ 'col-' + (12/contestants.length) }}">
+    <div class="team-name text-center">{{ contestant.name }}</div>
+    <div class="team-score text-center">{{ contestant.score | currency:'USD':'symbol':'.0' }}</div>
+  </div>
+</div>

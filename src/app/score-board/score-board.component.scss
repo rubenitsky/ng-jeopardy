@@ -1,0 +1,17 @@
+.score-board {
+  padding-bottom: 1em;
+  padding-top: 1em;
+
+  & .team-board {
+    color: #ffffff;
+
+    & .team-name {
+      font-size: 2em;
+      text-align: center;
+    }
+
+    & .team-score {
+      font-size: 2.5em;
+    }
+  }
+}
