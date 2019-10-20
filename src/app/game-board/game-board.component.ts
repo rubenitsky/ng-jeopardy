@@ -10,6 +10,10 @@ import {Clue} from "../shared/clue";
 })
 export class GameBoardComponent implements OnInit {
 
+  private contestant1 = new Contestant('Scott');
+  private contestant2 = new Contestant('Jim');
+  private contestant3 = new Contestant('Susan');
+
   private dinosaur = new Category('The Dinosaurs', [
     new Clue(200, ''),
     new Clue(400, ''),
@@ -57,19 +61,24 @@ export class GameBoardComponent implements OnInit {
     new Clue(800, ''),
     new Clue(1000, '')
   ]);
+
   public categories: Array<Category> = [
     this.dinosaur, this.women, this.oxford, this.instrument, this.belgium, this.composers
   ];
 
   public contestants: Array<Contestant> = [
-    new Contestant('Scott'),
-    new Contestant('Jim'),
-    new Contestant('Susan')
+    this.contestant1,
+    this.contestant2,
+    this.contestant3
   ];
 
   constructor() { }
 
   ngOnInit() {
+    this.contestant1.addToScore(140000);
+    this.contestant2.addToScore(30000);
+    this.contestant3.addToScore(80000);
+    console.log(this.dinosaur.clues);
   }
 
 }

@@ -1,22 +1,25 @@
-<div class="game-board-container">
-  <div class="">
-    <div *ngFor="let category of categories"
-         class="col d-flex flex-column">
-
-      <div class="grid-square category-header">{{ category.label }}</div>
-
+<div class="game-board-container d-flex flex-column align-content-between vh-100">
+  <div class="row category-header no-gutters">
+    <div *ngFor="let category of categories" class="col-2">
+      <div class="row grid-square no-gutters category-header-cell">
+        <span class="text-center align-middle">{{ category.label }}</span>
+      </div>
+    </div>
+  </div>
+  <div class="row d-flex flex-row flex-grow-1 no-gutters">
+    <div *ngFor="let category of categories" class="d-flex flex-column col-2">
       <div *ngFor="let clue of category.clues"
-           class="grid-square clue-container">
-        <h1>{{ clue.points }}</h1>
+           class="row grid-square no-gutters">
+        <span class="text-center align-middle">{{ clue.points | currency:'USD':'symbol':'.0' }}</span>
       </div>
 
     </div>
   </div>
   <!--TEAM SCORE BOARD SECTION - START-->
-  <div class="score-board">
-    <div *ngFor="let contestant of contestants" class="team-board">
-      <div class="team-name">{{ contestant.name }}</div>
-      <div class="team-score">{{ contestant.score }}</div>
+  <div class="score-board row no-gutters align-middle justify-content-center">
+    <div *ngFor="let contestant of contestants" class="team-board {{ 'col-' + (12/contestants.length) }}">
+      <div class="team-name text-center">{{ contestant.name }}</div>
+      <div class="team-score text-center">{{ contestant.score | currency:'USD':'symbol':'.0' }}</div>
     </div>
   <!--TEAM SCORE BOARD SECTION - END-->
   </div>
