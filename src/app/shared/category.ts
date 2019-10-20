@@ -24,7 +24,7 @@ export class Category {
   }
 
   public addClue(newClew: Clue) {
-    this._clues.set(newClew.score, newClew);
+    this._clues.set(newClew.points, newClew);
   }
 
   public getClue(score: number): Clue {
@@ -37,5 +37,9 @@ export class Category {
 
   public addClues(clues: Array<Clue>) {
     clues.forEach(clue => this.addClue(clue));
+  }
+
+  get clues() {
+    return Array.from(this._clues.values());
   }
 }

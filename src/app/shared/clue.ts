@@ -10,7 +10,7 @@ export class Clue {
   }
 
 
-  get score(): number {
+  get points(): number {
     return this._score;
   }
 
