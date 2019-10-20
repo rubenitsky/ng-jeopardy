@@ -1,0 +1,25 @@
+.hint-card-container {
+  background-color: transparent !important;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+}
+
+.hint-card-inner-container {
+  background-color: royalblue;
+  font-size: 10vh;
+  text-align: center;
+  color: inherit;
+  padding: 0.5em;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  height: 100%;
+  transition: ease-in-out;
+}

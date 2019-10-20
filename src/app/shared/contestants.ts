@@ -15,4 +15,14 @@ export class Contestants {
   public getList(): Array<Contestant> {
     return Array.from(this._contestantMap.values());
   }
+
+  public updatePositions(): void {
+    const sortedPositionList = this.getList().sort(
+      (a, b) => (a.score < b.score) ? 1 : -1
+    );
+
+    sortedPositionList.forEach((contestant, index) => {
+      contestant.position = index + 1;
+    })
+  }
 }

@@ -1,6 +1,6 @@
 
 .game-board-container {
-  background-color: royalblue;
+  background-color: inherit;
 }
 
 .grid-square {
@@ -16,6 +16,11 @@
   justify-content: center !important;
 
   border: 1px solid black;
+
+  &:hover {
+    background-color: rgba(90, 152, 234, 0.85);
+    cursor: pointer;
+  }
 }
 
 .category-header {
@@ -27,5 +32,6 @@
     padding-bottom: 1em;
     font-size: 1.75em;
     height: 100% !important;
+    cursor: default;
   }
 }

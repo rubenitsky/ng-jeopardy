@@ -1,6 +1,7 @@
 export class Contestant {
   private _name: string;
   private _score: number = 0;
+  private _position: number = 0;
 
   constructor(name: string) {
     this._name = name;
@@ -17,6 +18,14 @@ export class Contestant {
 
   get score(): number {
     return this._score;
+  }
+
+  get position(): number {
+    return this._position;
+  }
+
+  set position(value: number) {
+    this._position = value;
   }
 
   public addToScore(value: number) {

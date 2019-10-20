@@ -9,13 +9,15 @@
   <div class="row d-flex flex-row flex-grow-1 no-gutters">
     <div *ngFor="let category of categories" class="d-flex flex-column col-2">
       <div *ngFor="let clue of category.clues"
-           class="row grid-square no-gutters">
+           class="row grid-square no-gutters"
+           (click)="showHint(clue)">
         <span class="text-center align-middle">{{ clue.points | currency:'USD':'symbol':'.0' }}</span>
       </div>
 
     </div>
   </div>
   <!--TEAM SCORE BOARD SECTION - START-->
-  <app-score-board [contestants]="contestants"></app-score-board>
+  <app-score-board [contestants]="contestantsList"></app-score-board>
+  <app-hint-card [hint]="selectedClue?.clue" [show]="false"></app-hint-card>
   <!--TEAM SCORE BOARD SECTION - END-->
 </div>

@@ -7,6 +7,9 @@ export class Clue {
 
   constructor(score, clue?: string) {
     this._score = score;
+    if (clue) {
+      this._clue = clue;
+    }
   }
 
 

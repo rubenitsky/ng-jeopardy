@@ -1,6 +1,12 @@
 <div class="score-board row no-gutters align-middle justify-content-center">
   <div *ngFor="let contestant of contestants" class="team-board {{ 'col-' + (12/contestants.length) }}">
-    <div class="team-name text-center">{{ contestant.name }}</div>
-    <div class="team-score text-center">{{ contestant.score | currency:'USD':'symbol':'.0' }}</div>
+    <div class="team-name text-center">
+      <span class="badge badge-secondary">{{ contestant.position }}</span>
+      {{ contestant.name }}
+    </div>
+    <div class="team-score text-center"
+         [ngClass]="{'negative': contestant.score < 0 }">
+      {{ contestant.score | currency:'USD':'symbol':'.0' }}
+    </div>
   </div>
 </div>
