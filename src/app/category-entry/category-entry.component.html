@@ -18,15 +18,15 @@
         </div>
       </div>
       <hr>
-      <div class="row mb-3" *ngFor="let hintValue of HINT_VALUES">
+      <div class="row mb-3" *ngFor="let hintAnswer of categoryHintsFormArray.controls; let i = index">
         <div class="d-flex col-2 border-right border-dark justify-content-center align-items-center">
-          <h3>{{hintValue}}</h3>
+          <h3>{{hintAnswer.value.level}}</h3>
         </div>
         <div class="col-10">
           <div class="form-group row">
-            <label for="hint-{{hintValue}}" class="col-sm-2 col-form-label">Hint</label>
+            <label for="hint-{{hintAnswer.value.level}}" class="col-sm-2 col-form-label">Hint</label>
             <div class="col-sm-10">
-              <input id="hint-{{hintValue}}"
+              <input id="hint-{{hintAnswer.value.level}}"
                      type="text"
                      class="form-control"
                      placeholder="Hint"
@@ -34,9 +34,9 @@
             </div>
           </div>
           <div class="form-group row">
-            <label for="answer-{{hintValue}}" class="col-sm-2 col-form-label">Answer</label>
+            <label for="answer-{{hintAnswer.value.level}}" class="col-sm-2 col-form-label">Answer</label>
             <div class="col-sm-6">
-              <input id="answer-{{hintValue}}"
+              <input id="answer-{{hintAnswer.value.level}}"
                      type="text"
                      class="form-control"
                      placeholder="Answer"
