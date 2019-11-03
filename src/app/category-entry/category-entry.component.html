@@ -1,1 +1,57 @@
-<p>category-entry works!</p>
+<div class="category-input-container container">
+  <div class="category-list">
+    <div class="row" *ngFor="let category of categoryList">
+      {{ category.label }}
+    </div>
+  </div>
+
+
+  <form class="shadow p-3" [formGroup]="categoryFormGroup" (ngSubmit)="addCategory(categoryFormGroup)">
+    <div class="form-group">
+      <div class="row mb-3">
+        <div class="col">
+          <h2>New Category</h2>
+          <input type="text"
+                 class="form-control"
+                 placeholder="Category"
+                 [formControl]="nameFormControl">
+        </div>
+      </div>
+      <hr>
+      <div class="row mb-3" *ngFor="let hintValue of HINT_VALUES">
+        <div class="d-flex col-2 border-right border-dark justify-content-center align-items-center">
+          <h3>{{hintValue}}</h3>
+        </div>
+        <div class="col-10">
+          <div class="form-group row">
+            <label for="hint-{{hintValue}}" class="col-sm-2 col-form-label">Hint</label>
+            <div class="col-sm-10">
+              <input id="hint-{{hintValue}}"
+                     type="text"
+                     class="form-control"
+                     placeholder="Hint"
+                     [formControl]="hintFormControl">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="answer-{{hintValue}}" class="col-sm-2 col-form-label">Answer</label>
+            <div class="col-sm-6">
+              <input id="answer-{{hintValue}}"
+                     type="text"
+                     class="form-control"
+                     placeholder="Answer"
+                     [formControl]="answerFormControl">
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="d-flex col justify-content-end">
+          <button type="button" class="btn btn-outline-secondary mr-3">Clear</button>
+          <button type="submit" class="btn btn-primary px-5">Add</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
