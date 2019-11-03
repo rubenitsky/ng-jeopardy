@@ -7,7 +7,7 @@ export class Clue {
   private _answeredCorrectly: Contestant;
   private _isComplete: boolean;
 
-  constructor(score, clue?: string, answer?: string) {
+  constructor(score: number, clue?: string, answer?: string) {
     this._score = score;
     if (clue) {
       this._clue = clue;

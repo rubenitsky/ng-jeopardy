@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {CATEGORY_COUNT, HintValues} from "../shared/enums";
 import {Category} from "../shared/category";
 import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
+import {Clue} from "../shared/clue";
 
 @Component({
   selector: 'app-category-entry',
@@ -11,7 +12,7 @@ import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
 export class CategoryEntryComponent implements OnInit {
 
   public CATEGORY_COUNT = CATEGORY_COUNT;
-  public HINT_VALUES = Object.keys(HintValues).filter(val => !isNaN(val));
+  public HINT_VALUES = Object.keys(HintValues).filter(val => (typeof HintValues[val] !== 'number'));
 
   public categoryList: Array<Category> = [];
 
@@ -22,18 +23,18 @@ export class CategoryEntryComponent implements OnInit {
   public answerFormControl = new FormControl('', [Validators.required ]);
 
   public hintAnswerFormGroup = new FormGroup({
-    'level': this.levelFormControl,
-    'hint': this.hintFormControl,
+    'score': this.levelFormControl,
+    'clue': this.hintFormControl,
     'answer': this.answerFormControl
   });
 
   public categoryHintsFormArray = new FormArray([]);
   public categoryFormGroup = new FormGroup({
     'name': this.nameFormControl,
-    'hints': this.categoryHintsFormArray
+    'clues': this.categoryHintsFormArray
   });
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
     this.setHintForm();
@@ -42,28 +43,28 @@ export class CategoryEntryComponent implements OnInit {
   public setHintForm() {
     this.HINT_VALUES.forEach(hint => {
       this.categoryHintsFormArray.push(this.generateHintAnswerFormGroup(hint))
-    })
+    });
   }
 
   private generateHintAnswerFormGroup(level: string): FormGroup {
     return new FormGroup({
-      'level': new FormControl(level),
-      'hint': new FormControl('', [Validators.required]),
+      'score': new FormControl(level),
+      'clue': new FormControl('', [Validators.required]),
       'answer': new FormControl('', [Validators.required])
     });
   }
 
   public addCategory(categoryFormGroup: FormGroup): void {
-    console.log(categoryFormGroup.value);
     if (categoryFormGroup.valid) {
       const formValue = categoryFormGroup.value;
-      this.getClueListFromHints(formValue.hints);
-      this.categoryList.push(new Category(formValue.name, formValue.hints))
-
+      const listOfClues = this.getClueListFromHints(formValue.clues);
+      this.categoryList.push(new Category(formValue.name, listOfClues));
     }
   }
 
-  private getClueListFromHints() {
-
+  private getClueListFromHints(clues) {
+    const result = [];
+    clues.forEach(clue => result.push( new Clue(clue.score, clue.clue, clue.answer) ));
+    return result;
   }
 }

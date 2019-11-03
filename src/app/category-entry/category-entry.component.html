@@ -18,33 +18,39 @@
         </div>
       </div>
       <hr>
-      <div class="row mb-3" *ngFor="let hintAnswer of categoryHintsFormArray.controls; let i = index">
-        <div class="d-flex col-2 border-right border-dark justify-content-center align-items-center">
-          <h3>{{hintAnswer.value.level}}</h3>
-        </div>
-        <div class="col-10">
-          <div class="form-group row">
-            <label for="hint-{{hintAnswer.value.level}}" class="col-sm-2 col-form-label">Hint</label>
-            <div class="col-sm-10">
-              <input id="hint-{{hintAnswer.value.level}}"
-                     type="text"
-                     class="form-control"
-                     placeholder="Hint"
-                     [formControl]="hintFormControl">
-            </div>
+
+      <div formArrayName="clues">
+        <div class="row mb-3"
+             *ngFor="let hintAnswer of categoryFormGroup.get('clues').controls;
+             let clueIndex = index;" [formGroupName]="clueIndex">
+          <div class="d-flex col-2 border-right border-dark justify-content-center align-items-center">
+            <h3>{{hintAnswer.get('score').value}}</h3>
           </div>
-          <div class="form-group row">
-            <label for="answer-{{hintAnswer.value.level}}" class="col-sm-2 col-form-label">Answer</label>
-            <div class="col-sm-6">
-              <input id="answer-{{hintAnswer.value.level}}"
-                     type="text"
-                     class="form-control"
-                     placeholder="Answer"
-                     [formControl]="answerFormControl">
+          <div class="col-10">
+            <div class="form-group row">
+              <label for="hint-{{hintAnswer.get('score').value}}" class="col-sm-2 col-form-label">Hint</label>
+              <div class="col-sm-10">
+                <input id="hint-{{hintAnswer.get('score').value}}"
+                       type="text"
+                       class="form-control"
+                       placeholder="Hint"
+                       formControlName="clue">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="answer-{{hintAnswer.get('score').value}}" class="col-sm-2 col-form-label">Answer</label>
+              <div class="col-sm-6">
+                <input id="answer-{{hintAnswer.get('score').value}}"
+                       type="text"
+                       class="form-control"
+                       placeholder="Answer"
+                       formControlName="answer">
+              </div>
             </div>
           </div>
         </div>
       </div>
+
       <hr>
       <div class="row">
         <div class="d-flex col justify-content-end">
