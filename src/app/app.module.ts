@@ -7,6 +7,7 @@ import { GameBoardComponent } from './game-board/game-board.component';
 import { ScoreBoardComponent } from './score-board/score-board.component';
 import { ClueGridComponent } from './clue-grid/clue-grid.component';
 import { HintCardComponent } from './hint-card/hint-card.component';
+import { CoverComponent } from './cover/cover.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { HintCardComponent } from './hint-card/hint-card.component';
     GameBoardComponent,
     ScoreBoardComponent,
     ClueGridComponent,
-    HintCardComponent
+    HintCardComponent,
+    CoverComponent
   ],
   imports: [
     BrowserModule,
