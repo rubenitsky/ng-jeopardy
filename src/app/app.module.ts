@@ -9,6 +9,7 @@ import { ClueGridComponent } from './clue-grid/clue-grid.component';
 import { HintCardComponent } from './hint-card/hint-card.component';
 import { CoverComponent } from './cover/cover.component';
 import { ContestantEntryComponent } from './contestant-entry/contestant-entry.component';
+import { CategoryEntryComponent } from './category-entry/category-entry.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ContestantEntryComponent } from './contestant-entry/contestant-entry.co
     ClueGridComponent,
     HintCardComponent,
     CoverComponent,
-    ContestantEntryComponent
+    ContestantEntryComponent,
+    CategoryEntryComponent
   ],
   imports: [
     BrowserModule,
