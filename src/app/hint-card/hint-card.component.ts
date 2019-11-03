@@ -8,8 +8,8 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class HintCardComponent implements OnInit {
 
-  @Input() show: boolean;
-  @Input() hint: string;
+  @Input() show: boolean = true;
+  @Input() hint: string = 'If I were a parrot, I would probably fly there.';
 
   constructor() { }
 

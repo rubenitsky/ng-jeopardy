@@ -1,24 +1,53 @@
-.score-board {
-  padding-bottom: 1em;
-  padding-top: 1em;
+.score-board-container {
   background-color: #555;
 
-  & .team-board {
-    color: #ffffff;
+  & .timer-container {
+    margin: 1em;
+    margin-left: 1.75em;
+    border-radius: 50%;
+    display: inline-block;
+    border: 4px solid darkred;
+    padding: 0.55em;
+    padding-top: 0.4em;
+    padding-bottom: 0.4em;
 
-    & .team-name {
-      font-size: 2.5em;
+    & .time {
+      margin: 0.15em;
+      margin-top: 0.1em;
+      margin-bottom: 0;
+      font-size: 4em;
+      line-height: 1em;
+    }
+
+    & .units {
+      font-size: 1em;
       text-align: center;
+      margin: 0.25em;
+      margin-top: 0;
     }
+  }
 
-    & .team-score {
-      font-size: 2.5em;
-      font-weight: bold;
-    }
+  & .score-board {
+    padding-bottom: 1em;
+    padding-top: 1em;
 
-    & .negative {
-      color: #c9474d;
-      //-webkit-text-stroke: 1px #ffffff;
+    & .team-board {
+      color: #ffffff;
+
+      & .team-name {
+        font-size: 2.5em;
+        text-align: center;
+      }
+
+      & .team-score {
+        font-size: 2.5em;
+        font-weight: bold;
+      }
+
+      & .negative {
+        color: #c9474d;
+        //-webkit-text-stroke: 1px #ffffff;
+      }
     }
   }
 }
