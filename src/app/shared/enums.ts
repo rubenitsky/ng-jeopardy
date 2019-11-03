@@ -2,9 +2,9 @@
 export const CATEGORY_COUNT = 6;
 
 export enum HintValues {
-  200 = '200',
-  400 = '400',
-  600 = '600',
-  800 = '800',
-  1000 = '1000'
+  LEVEL_200 = 200,
+  LEVEL_400 = 400,
+  LEVEL_600 = 600,
+  LEVEL_800 = 800,
+  LEVEL_1000 = 1000
 }
