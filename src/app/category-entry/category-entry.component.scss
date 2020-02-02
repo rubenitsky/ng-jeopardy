@@ -1,8 +1,14 @@
 .category-input-container {
-  margin-top: 1em;
+  color: #222222;
 
   & form {
-    background-color: #efefef;
-    color: #333333;
+    //background-color: #efefef;
   }
+}
+
+.rotate-270 {
+  display:block;
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3); //For IE support
 }

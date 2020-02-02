@@ -1,63 +1,78 @@
-<div class="category-input-container container">
-  <div class="category-list">
-    <div class="row" *ngFor="let category of categoryList">
-      {{ category.label }}
+<div class="category-input-container container pt-3">
+  <div class="row">
+    <div class="col col-sm-12 col-md-6 col-xl-5 mb-3 pb-3">
+      <div class="card">
+        <h5 class="card-header">Categories Added</h5>
+        <div class="card-body">
+          <div class="col-12">
+            <div class="row mb-2" *ngFor="let category of categoryList; index as i">
+              <div class="col p-0">
+                <span class="badge badge-light pr-2">{{ i + 1 }}</span>
+                {{ category.label }}
+              </div>
+              <div class="col-2 d-flex flex-row justify-content-end p-0">
+                <button type="button" class="btn btn-outline-primary btn-sm badge mr-1">Edit</button>
+                <button type="button" class="btn btn-outline-secondary btn-sm badge">Remove</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col col-sm-12 col-md-6 col-xl-7">
+      <form class="p-3" [formGroup]="categoryFormGroup" (ngSubmit)="addCategory(categoryFormGroup)">
+        <div class="form-group">
+          <div class="row mb-3">
+            <div class="col">
+              <h5>New Category</h5>
+              <input type="text"
+                     class="form-control"
+                     placeholder="Category Name"
+                     [formControl]="nameFormControl">
+            </div>
+          </div>
+          <hr>
+
+          <div formArrayName="clues">
+            <div class="row mb-3"
+                 *ngFor="let hintAnswer of categoryFormGroup.get('clues').controls;
+                   let clueIndex = index;" [formGroupName]="clueIndex">
+              <div class="d-flex col-2 border-right border-dark justify-content-center align-items-center">
+                <h3 class="rotate-270">{{hintAnswer.get('score').value}}</h3>
+              </div>
+              <div class="col-10">
+                <div class="form-group row">
+                  <div class="col-sm-10">
+                    <input id="hint-{{hintAnswer.get('score').value}}"
+                           type="text"
+                           class="form-control"
+                           placeholder="Hint"
+                           formControlName="clue">
+                  </div>
+                </div>
+                <div class="form-group row mb-0">
+                  <div class="col-sm-6">
+                    <input id="answer-{{hintAnswer.get('score').value}}"
+                           type="text"
+                           class="form-control"
+                           placeholder="Answer"
+                           formControlName="answer">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr>
+          <div class="row">
+            <div class="d-flex col justify-content-end">
+              <button type="submit" class="btn btn-primary px-5 mr-3">Add</button>
+              <button type="button" class="btn btn-outline-secondary">Clear</button>
+            </div>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
-
-
-  <form class="shadow p-3" [formGroup]="categoryFormGroup" (ngSubmit)="addCategory(categoryFormGroup)">
-    <div class="form-group">
-      <div class="row mb-3">
-        <div class="col">
-          <h2>New Category</h2>
-          <input type="text"
-                 class="form-control"
-                 placeholder="Category"
-                 [formControl]="nameFormControl">
-        </div>
-      </div>
-      <hr>
-
-      <div formArrayName="clues">
-        <div class="row mb-3"
-             *ngFor="let hintAnswer of categoryFormGroup.get('clues').controls;
-             let clueIndex = index;" [formGroupName]="clueIndex">
-          <div class="d-flex col-2 border-right border-dark justify-content-center align-items-center">
-            <h3>{{hintAnswer.get('score').value}}</h3>
-          </div>
-          <div class="col-10">
-            <div class="form-group row">
-              <label for="hint-{{hintAnswer.get('score').value}}" class="col-sm-2 col-form-label">Hint</label>
-              <div class="col-sm-10">
-                <input id="hint-{{hintAnswer.get('score').value}}"
-                       type="text"
-                       class="form-control"
-                       placeholder="Hint"
-                       formControlName="clue">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="answer-{{hintAnswer.get('score').value}}" class="col-sm-2 col-form-label">Answer</label>
-              <div class="col-sm-6">
-                <input id="answer-{{hintAnswer.get('score').value}}"
-                       type="text"
-                       class="form-control"
-                       placeholder="Answer"
-                       formControlName="answer">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <hr>
-      <div class="row">
-        <div class="d-flex col justify-content-end">
-          <button type="button" class="btn btn-outline-secondary mr-3">Clear</button>
-          <button type="submit" class="btn btn-primary px-5">Add</button>
-        </div>
-      </div>
-    </div>
-  </form>
 </div>

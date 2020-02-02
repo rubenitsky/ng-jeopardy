@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {CATEGORY_COUNT, HintValues} from "../shared/enums";
 import {Category} from "../shared/category";
 import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
@@ -11,6 +11,7 @@ import {Clue} from "../shared/clue";
 })
 export class CategoryEntryComponent implements OnInit {
 
+  @Output() addNewCategory = new EventEmitter<Category>();
   public CATEGORY_COUNT = CATEGORY_COUNT;
   public HINT_VALUES = Object.keys(HintValues).filter(val => (typeof HintValues[val] !== 'number'));
 
@@ -38,6 +39,14 @@ export class CategoryEntryComponent implements OnInit {
 
   ngOnInit() {
     this.setHintForm();
+
+    this.categoryList.push(new Category('The Dinosaurs', [
+      new Clue(200, 'ras at nibh nec tortor sollicitudin rhoncus ac vel quam.'),
+      new Clue(400, 'Ut tristique justo vitae accumsan volutpat.'),
+      new Clue(600, 'Suspendisse dignissim metus ut velit faucibus porttitor.'),
+      new Clue(800, 'Pellentesque sit amet sem et sapien laoreet aliquam vitae ut ante.'),
+      new Clue(1000, 'Cras rhoncus magna a varius vulputate.')
+    ]));
   }
 
   public setHintForm() {
@@ -59,6 +68,7 @@ export class CategoryEntryComponent implements OnInit {
       const formValue = categoryFormGroup.value;
       const listOfClues = this.getClueListFromHints(formValue.clues);
       this.categoryList.push(new Category(formValue.name, listOfClues));
+      this.addNewCategory.emit(categoryFormGroup.value);
     }
   }
 
