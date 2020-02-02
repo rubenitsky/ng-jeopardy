@@ -21,58 +21,70 @@
     </div>
 
     <div class="col col-sm-12 col-md-6 col-xl-7">
-      <form class="p-3" [formGroup]="categoryFormGroup" (ngSubmit)="addCategory(categoryFormGroup)">
-        <div class="form-group">
-          <div class="row mb-3">
-            <div class="col">
-              <h5>New Category</h5>
-              <input type="text"
-                     class="form-control"
-                     placeholder="Category Name"
-                     [formControl]="nameFormControl">
-            </div>
-          </div>
-          <hr>
+      <form class="p-3" [formGroup]="categoryListFormGroup">
 
-          <div formArrayName="clues">
-            <div class="row mb-3"
-                 *ngFor="let hintAnswer of categoryFormGroup.get('clues').controls;
-                   let clueIndex = index;" [formGroupName]="clueIndex">
-              <div class="d-flex col-2 border-right border-dark justify-content-center align-items-center">
-                <h3 class="rotate-270">{{hintAnswer.get('score').value}}</h3>
+        <div formArrayName="categories">
+          <div class="form-group" *ngFor="let categoryItem of categoryListFormGroup.get('categories').controls; let i = index">
+            <div class="col" formGroupName="{{i}}">
+            <h5>New Category</h5>
+            <div class="row mb-3">
+              <div class="col">
+                <input type="text"
+                       class="form-control form-control-sm"
+                       placeholder="Category Name"
+                       formControlName="name">
               </div>
-              <div class="col-10">
-                <div class="form-group row">
-                  <div class="col-sm-10">
-                    <input id="hint-{{hintAnswer.get('score').value}}"
-                           type="text"
-                           class="form-control"
-                           placeholder="Hint"
-                           formControlName="clue">
-                  </div>
-                </div>
-                <div class="form-group row mb-0">
-                  <div class="col-sm-6">
-                    <input id="answer-{{hintAnswer.get('score').value}}"
-                           type="text"
-                           class="form-control"
-                           placeholder="Answer"
-                           formControlName="answer">
-                  </div>
-                </div>
+              <div class="col-3 d-flex flex-row justify-content-end p-0">
+                <button type="button" class="btn btn-outline-primary btn-sm badge mr-1">Edit</button>
+                <button type="button" class="btn btn-outline-secondary btn-sm badge">Remove</button>
               </div>
             </div>
-          </div>
+            <hr>
 
-          <hr>
-          <div class="row">
-            <div class="d-flex col justify-content-end">
-              <button type="submit" class="btn btn-primary px-5 mr-3">Add</button>
-              <button type="button" class="btn btn-outline-secondary">Clear</button>
+              <div formGroupName="clues">
+                <div class="row mb-3"
+                     *ngFor="let hintAnswer of getCategoryCluesControlList(categoryItem).controls; let j = index">
+                  <div formGroupName="{{j}}" class="d-flex col">
+                    <div class="d-flex col-2 border-right border-dark justify-content-center align-items-center">
+                      <h3 class="rotate-270">{{getClueScore(hintAnswer)}}</h3>
+                    </div>
+                    <div class="col">
+                      <div class="form-group row">
+                        <div class="col-sm-10">
+                          <input name="hint-{{getClueScore(hintAnswer)}}"
+                                 type="text"
+                                 class="form-control form-control-sm"
+                                 placeholder="Clue"
+                                 formControlName="clue">
+                        </div>
+                      </div>
+                      <div class="form-group row mb-0">
+                        <div class="col-sm-6">
+                          <input name="answer-{{getClueScore(hintAnswer)}}"
+                                 type="text"
+                                 class="form-control form-control-sm"
+                                 placeholder="Answer"
+                                 formControlName="answer">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <hr>
+            <div class="row">
+              <div class="d-flex col justify-content-end">
+                <button type="submit" class="btn btn-primary px-5 mr-3">Add</button>
+                <button type="button" class="btn btn-outline-secondary">Clear</button>
+              </div>
             </div>
           </div>
         </div>
+
       </form>
     </div>
   </div>
 </div>
+<pre>{{ categoryListFormGroup.value | json }}</pre>

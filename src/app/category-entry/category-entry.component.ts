@@ -1,7 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {CATEGORY_COUNT, HintValues} from "../shared/enums";
 import {Category} from "../shared/category";
-import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Clue} from "../shared/clue";
 
 @Component({
@@ -29,16 +29,17 @@ export class CategoryEntryComponent implements OnInit {
     'answer': this.answerFormControl
   });
 
-  public categoryHintsFormArray = new FormArray([]);
-  public categoryFormGroup = new FormGroup({
-    'name': this.nameFormControl,
-    'clues': this.categoryHintsFormArray
+  public categoryListArray = new FormArray([]);
+  public categoryListFormGroup = new FormGroup({
+    categories: this.categoryListArray
   });
+
+  public categoryHintsFormArray = new FormArray([]);
 
   constructor() {}
 
   ngOnInit() {
-    this.setHintForm();
+    this.generateNewCategoryFormGroup();
 
     this.categoryList.push(new Category('The Dinosaurs', [
       new Clue(200, 'ras at nibh nec tortor sollicitudin rhoncus ac vel quam.'),
@@ -49,10 +50,25 @@ export class CategoryEntryComponent implements OnInit {
     ]));
   }
 
-  public setHintForm() {
+  public generateNewCategoryFormGroup(): void {
+    this.categoryListArray.push(
+      new FormGroup({
+        'name': this.nameFormControl,
+        'clues': this.generateClueAnswerFormArray()
+      })
+    );
+    console.log(this.categoryListFormGroup);
+    console.log('List Array: ', this.categoryListArray);
+  }
+
+  public generateClueAnswerFormArray(): FormArray {
+    const tempClueAnswerFormArray = new FormArray([]);
+
     this.HINT_VALUES.forEach(hint => {
-      this.categoryHintsFormArray.push(this.generateHintAnswerFormGroup(hint))
+      tempClueAnswerFormArray.push(this.generateHintAnswerFormGroup(hint))
     });
+
+    return tempClueAnswerFormArray;
   }
 
   private generateHintAnswerFormGroup(level: string): FormGroup {
@@ -76,5 +92,19 @@ export class CategoryEntryComponent implements OnInit {
     const result = [];
     clues.forEach(clue => result.push( new Clue(clue.score, clue.clue, clue.answer) ));
     return result;
+  }
+
+  public getFormGroupControl(categoryItem: AbstractControl, controlName: string): FormControl {
+    console.log(controlName, categoryItem, categoryItem.get(controlName));
+    return categoryItem.get(controlName) as FormControl;
+  }
+
+  public getCategoryCluesControlList(categoryItem: AbstractControl): FormArray {
+    console.log('Category Clue List: ', categoryItem, categoryItem.get('clues') as FormArray);
+    return categoryItem.get('clues') as FormArray;
+  }
+
+  public getClueScore(clue: AbstractControl): number {
+    return clue.get('score').value;
   }
 }
