@@ -16,19 +16,6 @@ export class CategoryEntryComponent implements OnInit {
   public HINT_VALUES = Object.keys(HintValues).filter(val => (typeof HintValues[val] !== 'number'));
 
   public categoryList: Array<Category> = [];
-
-
-  public nameFormControl = new FormControl('', [Validators.required]);
-  public levelFormControl = new FormControl('', []);
-  public hintFormControl = new FormControl('', [ Validators.required ]);
-  public answerFormControl = new FormControl('', [Validators.required ]);
-
-  public hintAnswerFormGroup = new FormGroup({
-    'score': this.levelFormControl,
-    'clue': this.hintFormControl,
-    'answer': this.answerFormControl
-  });
-
   public categoryListArray = new FormArray([]);
   public categoryListFormGroup = new FormGroup({
     categories: this.categoryListArray
@@ -40,25 +27,15 @@ export class CategoryEntryComponent implements OnInit {
 
   ngOnInit() {
     this.generateNewCategoryFormGroup();
-
-    this.categoryList.push(new Category('The Dinosaurs', [
-      new Clue(200, 'ras at nibh nec tortor sollicitudin rhoncus ac vel quam.'),
-      new Clue(400, 'Ut tristique justo vitae accumsan volutpat.'),
-      new Clue(600, 'Suspendisse dignissim metus ut velit faucibus porttitor.'),
-      new Clue(800, 'Pellentesque sit amet sem et sapien laoreet aliquam vitae ut ante.'),
-      new Clue(1000, 'Cras rhoncus magna a varius vulputate.')
-    ]));
   }
 
   public generateNewCategoryFormGroup(): void {
     this.categoryListArray.push(
       new FormGroup({
-        'name': this.nameFormControl,
+        'name': new FormControl('', [Validators.required]),
         'clues': this.generateClueAnswerFormArray()
       })
     );
-    console.log(this.categoryListFormGroup);
-    console.log('List Array: ', this.categoryListArray);
   }
 
   public generateClueAnswerFormArray(): FormArray {
@@ -94,13 +71,7 @@ export class CategoryEntryComponent implements OnInit {
     return result;
   }
 
-  public getFormGroupControl(categoryItem: AbstractControl, controlName: string): FormControl {
-    console.log(controlName, categoryItem, categoryItem.get(controlName));
-    return categoryItem.get(controlName) as FormControl;
-  }
-
   public getCategoryCluesControlList(categoryItem: AbstractControl): FormArray {
-    console.log('Category Clue List: ', categoryItem, categoryItem.get('clues') as FormArray);
     return categoryItem.get('clues') as FormArray;
   }
 

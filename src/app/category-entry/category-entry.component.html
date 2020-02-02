@@ -1,47 +1,31 @@
-<div class="category-input-container container pt-3">
+<div class="category-input-container p-3">
   <div class="row">
-    <div class="col col-sm-12 col-md-6 col-xl-5 mb-3 pb-3">
-      <div class="card">
-        <h5 class="card-header">Categories Added</h5>
-        <div class="card-body">
-          <div class="col-12">
-            <div class="row mb-2" *ngFor="let category of categoryList; index as i">
-              <div class="col p-0">
-                <span class="badge badge-light pr-2">{{ i + 1 }}</span>
-                {{ category.label }}
-              </div>
-              <div class="col-2 d-flex flex-row justify-content-end p-0">
-                <button type="button" class="btn btn-outline-primary btn-sm badge mr-1">Edit</button>
-                <button type="button" class="btn btn-outline-secondary btn-sm badge">Remove</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <div class="col col-sm-12 col-md-6 col-xl-7">
-      <form class="p-3" [formGroup]="categoryListFormGroup">
+    <div class="d-flex flex-grow-1">
+      <form class="d-flex flex-column d-flex flex-grow-1" [formGroup]="categoryListFormGroup">
 
-        <div formArrayName="categories">
+        <div formArrayName="categories" class="d-flex">
           <div class="form-group" *ngFor="let categoryItem of categoryListFormGroup.get('categories').controls; let i = index">
             <div class="col" formGroupName="{{i}}">
-            <h5>New Category</h5>
-            <div class="row mb-3">
-              <div class="col">
+            <h5>{{categoryItem.get('name').value}}</h5>
+            <div class="d-flex mb-1">
+              <div class="col px-0">
                 <input type="text"
                        class="form-control form-control-sm"
                        placeholder="Category Name"
                        formControlName="name">
               </div>
-              <div class="col-3 d-flex flex-row justify-content-end p-0">
+            </div>
+            <div class="d-flex mb-3 justify-content-end">
+              <div class="d-flex flex-row justify-content-end p-0">
                 <button type="button" class="btn btn-outline-primary btn-sm badge mr-1">Edit</button>
-                <button type="button" class="btn btn-outline-secondary btn-sm badge">Remove</button>
+                <button type="button"
+                        class="btn btn-outline-secondary btn-sm badge"
+                        (click)="categoryListArray.removeAt(i)">Remove</button>
               </div>
             </div>
-            <hr>
 
-              <div formGroupName="clues">
+              <div formGroupName="clues" class="border-top pt-3">
                 <div class="row mb-3"
                      *ngFor="let hintAnswer of getCategoryCluesControlList(categoryItem).controls; let j = index">
                   <div formGroupName="{{j}}" class="d-flex col">
@@ -50,7 +34,7 @@
                     </div>
                     <div class="col">
                       <div class="form-group row">
-                        <div class="col-sm-10">
+                        <div class="col pr-0">
                           <input name="hint-{{getClueScore(hintAnswer)}}"
                                  type="text"
                                  class="form-control form-control-sm"
@@ -59,7 +43,7 @@
                         </div>
                       </div>
                       <div class="form-group row mb-0">
-                        <div class="col-sm-6">
+                        <div class="col pr-0">
                           <input name="answer-{{getClueScore(hintAnswer)}}"
                                  type="text"
                                  class="form-control form-control-sm"
@@ -72,19 +56,16 @@
                 </div>
               </div>
             </div>
-
-            <hr>
-            <div class="row">
-              <div class="d-flex col justify-content-end">
-                <button type="submit" class="btn btn-primary px-5 mr-3">Add</button>
-                <button type="button" class="btn btn-outline-secondary">Clear</button>
-              </div>
-            </div>
           </div>
         </div>
 
+        <div class="d-flex col justify-content-end">
+          <button type="submit" class="btn btn-primary px-5 mr-3"
+                  [disabled]="categoryListArray.length >= CATEGORY_COUNT"
+                  (click)="generateNewCategoryFormGroup()">Add</button>
+          <button type="button" class="btn btn-outline-secondary">Clear</button>
+        </div>
       </form>
     </div>
   </div>
 </div>
-<pre>{{ categoryListFormGroup.value | json }}</pre>
