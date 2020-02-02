@@ -23,13 +23,16 @@
     <div class="row">
       <div class="col d-flex justify-content-end">
         <button type="button" class="btn btn-primary px-5 mr-3"
-                [disabled]="contestantArray.length >= 3"
+                [ngClass]="{'invisible': contestantArray.length >= CONTESTANT_LIMIT}"
+                [disabled]="contestantArray.length >= CONTESTANT_LIMIT"
                 (click)="insertNewContestantFG()">Add</button>
         <button type="submit" class="btn btn-success px-5 mr-3"
-                [disabled]="contestantArray.length < 3">Finish</button>
+                (click)="finished()"
+                [disabled]="!contestantFormGroup.valid || contestantArray.length < CONTESTANT_LIMIT">Finish</button>
       </div>
     </div>
   </form>
   <pre>{{ contestantFormGroup.value | json}}</pre>
+  <pre>{{ contestantFormGroup.valid }}</pre>
 
 </div>

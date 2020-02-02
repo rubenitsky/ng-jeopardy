@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
+import {CONTESTANT_LIMIT} from "../shared/enums";
 
 
 @Component({
@@ -9,6 +10,7 @@ import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
 })
 export class ContestantEntryComponent implements OnInit {
 
+  public CONTESTANT_LIMIT = CONTESTANT_LIMIT;
   public contestantArray = new FormArray([]);
   public contestantFormGroup: FormGroup = new FormGroup({
     contestants: this.contestantArray
@@ -18,6 +20,8 @@ export class ContestantEntryComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.insertNewContestantFG();
+    this.insertNewContestantFG();
     this.insertNewContestantFG();
   }
 
@@ -39,6 +43,10 @@ export class ContestantEntryComponent implements OnInit {
 
   public clearContestantNameValue(indx: number): void {
     this.contestantArray.at(indx).setValue('');
+  }
+
+  public finished(): void {
+    console.log(this.contestantFormGroup);
   }
 
 }
